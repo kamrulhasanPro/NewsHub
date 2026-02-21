@@ -3,9 +3,19 @@ import { getDB } from "../configs/dbConnect.js";
 
 export const allNews = async (req, res) => {
   try {
+    const { language, country } = req.query;
+
+    const query = {};
+    if (language) {
+      query.language = language;
+    }
+    if (country) {
+      query.country = country;
+    }
+
     const newsCollection = await getDB().collection("news");
 
-    const news = await newsCollection.find().toArray();
+    const news = await newsCollection.find(query).toArray();
 
     res.json({
       message: "All News",

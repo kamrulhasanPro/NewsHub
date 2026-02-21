@@ -16,10 +16,12 @@ const News = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:2000/api/news")
+    fetch(
+      `http://localhost:2000/api/news?language=${filters.language}&country=${filters.country}&category=business`,
+    )
       .then((res) => res.json())
       .then((data) => setNews(data?.news));
-  }, []);
+  }, [filters]);
   return (
     <div className="py-8">
       {/* title */}
@@ -30,14 +32,14 @@ const News = () => {
       </div>
 
       {/* show all news here */}
-      <section className="flex">
+      <section className="flex gap-4">
         <div className="grid grid-cols-3 gap-4 mt-5 flex-4">
           {news.map((article, i) => (
             <NewsCard article={article} key={i} />
           ))}
         </div>
-        <div className="flex-3">
-          <FilterSidebar filters={filters} />
+        <div className="">
+          <FilterSidebar filters={filters} setFilters={setFilters} />
         </div>
       </section>
     </div>

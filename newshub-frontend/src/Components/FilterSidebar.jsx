@@ -60,9 +60,9 @@ const FilterSidebar = ({ filters, setFilters }) => {
           onChange={(e) => setFilters({ ...filters, country: e.target.value })}
         >
           <option value="">All</option>
-          <option value="us">USA</option>
-          <option value="uk">UK</option>
-          <option value="austria">Austria</option>
+          <option value="greece">greece</option>
+          <option value="spain">spain</option>
+          <option value="france">france</option>
         </select>
       </div>
 
