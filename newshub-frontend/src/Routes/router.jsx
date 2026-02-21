@@ -14,9 +14,11 @@ export const router = createBrowserRouter([
         Component: News,
       },
       {
-        path: 'news/:id',
-        Component: NewsDetails
-      }
+        path: "news/:id",
+        Component: NewsDetails,
+        loader: ({ params }) =>
+          fetch(`http://localhost:2000/api/news/${params?.id}`),
+      },
     ],
   },
 ]);

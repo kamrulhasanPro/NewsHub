@@ -10,9 +10,12 @@ import {
   FiInfo,
 } from "react-icons/fi";
 import { HiOutlineNewspaper } from "react-icons/hi2";
+import { useLoaderData } from "react-router";
 
-const NewsDetails = ({ article }) => {
-//   if (!article) return null;
+const NewsDetails = () => {
+  //   if (!article) return null;
+  const article = useLoaderData();
+  console.log(article);
 
   const {
     title,
@@ -29,42 +32,38 @@ const NewsDetails = ({ article }) => {
     country,
     category,
     datatype,
-  } = article || {
-"article_id": "c4424e60cef939dc801ff88df0582502",
-"link": "https://www.sn.at/sport/fussball/zweite-liga/verzicht-auf-einspruch-klagenfurts-abstieg-ist-besiegelt-art-636745",
-"title": "Verzicht auf Einspruch: Klagenfurts Abstieg ist besiegelt",
-"description": "Fußball-Zweitligist Austria Klagenfurt wird das Anfang Februar eröffnete Insolvenzverfahren gegen den Club nicht beeinspruchen. Der Abstieg ist damit besiegelt. Wie die Kärntner am Freitag bekanntgaben, soll der Spiel- und Geschäftsbetrieb bis Saisonende aufrechterhalten werden, ehe man 2026/27 mit einem Antritt in der Regionalliga plant. Mittelfristiges Ziel sei die Rückkehr in den Profifußball, hieß es in einer Mitteilung.",
-"content": "ONLY AVAILABLE IN PAID PLANS",
-"keywords": null,
-"creator": [
-"salzburger nachrichten"
-],
-"language": "german",
-"country": [
-"austria"
-],
-"category": [
-"sports"
-],
-"datatype": "news",
-"pubDate": "2026-02-20 16:23:00",
-"pubDateTZ": "UTC",
-"fetched_at": "2026-02-20 16:40:40",
-"image_url": "https://www.sn.at/storage/image/5/7/5/7/1077575_klagenfurt-wird-naechste-saison-in-der-regionalliga-spielen_structured-data-img_1FC8GW_Rtu8FK.jpg",
-"video_url": null,
-"source_id": "sn",
-"source_name": "Salzburger Nachrichten",
-"source_priority": 121342,
-"source_url": "https://www.sn.at",
-"source_icon": "https://n.bytvi.com/sn.png",
-"sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-"sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-"ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-"ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-"ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-"ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-"duplicate": false
-};
+  } = article?.news || {
+    article_id: "c4424e60cef939dc801ff88df0582502",
+    link: "https://www.sn.at/sport/fussball/zweite-liga/verzicht-auf-einspruch-klagenfurts-abstieg-ist-besiegelt-art-636745",
+    title: "Verzicht auf Einspruch: Klagenfurts Abstieg ist besiegelt",
+    description:
+      "Fußball-Zweitligist Austria Klagenfurt wird das Anfang Februar eröffnete Insolvenzverfahren gegen den Club nicht beeinspruchen. Der Abstieg ist damit besiegelt. Wie die Kärntner am Freitag bekanntgaben, soll der Spiel- und Geschäftsbetrieb bis Saisonende aufrechterhalten werden, ehe man 2026/27 mit einem Antritt in der Regionalliga plant. Mittelfristiges Ziel sei die Rückkehr in den Profifußball, hieß es in einer Mitteilung.",
+    content: "ONLY AVAILABLE IN PAID PLANS",
+    keywords: null,
+    creator: ["salzburger nachrichten"],
+    language: "german",
+    country: ["austria"],
+    category: ["sports"],
+    datatype: "news",
+    pubDate: "2026-02-20 16:23:00",
+    pubDateTZ: "UTC",
+    fetched_at: "2026-02-20 16:40:40",
+    image_url:
+      "https://www.sn.at/storage/image/5/7/5/7/1077575_klagenfurt-wird-naechste-saison-in-der-regionalliga-spielen_structured-data-img_1FC8GW_Rtu8FK.jpg",
+    video_url: null,
+    source_id: "sn",
+    source_name: "Salzburger Nachrichten",
+    source_priority: 121342,
+    source_url: "https://www.sn.at",
+    source_icon: "https://n.bytvi.com/sn.png",
+    sentiment: "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+    sentiment_stats: "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+    ai_tag: "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+    ai_region: "ONLY AVAILABLE IN CORPORATE PLANS",
+    ai_org: "ONLY AVAILABLE IN CORPORATE PLANS",
+    ai_summary: "ONLY AVAILABLE IN PAID PLANS",
+    duplicate: false,
+  };
 
   const publishedDate = new Date(pubDate).toLocaleString("en-US", {
     year: "numeric",
@@ -74,14 +73,11 @@ const NewsDetails = ({ article }) => {
     minute: "2-digit",
   });
 
-  const fetchedDate = fetched_at
-    ? new Date(fetched_at).toLocaleString()
-    : null;
+  const fetchedDate = fetched_at ? new Date(fetched_at).toLocaleString() : null;
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-200 px-4 py-10">
       <div className="max-w-5xl mx-auto space-y-8">
-
         {/* HERO IMAGE */}
         {image_url && (
           <img
@@ -117,7 +113,6 @@ const NewsDetails = ({ article }) => {
 
         {/* META INFO */}
         <div className="flex flex-wrap gap-6 text-sm text-gray-400">
-
           {source_name && (
             <div className="flex items-center gap-2">
               <HiOutlineNewspaper />
@@ -167,8 +162,8 @@ const NewsDetails = ({ article }) => {
             <div className="flex items-start gap-2 text-gray-500 italic">
               <FiInfo className="mt-1" />
               <p>
-                Full article content is not available on the free plan.
-                Please read the complete article on the publisher’s website.
+                Full article content is not available on the free plan. Please
+                read the complete article on the publisher’s website.
               </p>
             </div>
           )}
@@ -176,7 +171,6 @@ const NewsDetails = ({ article }) => {
 
         {/* EXTRA INFORMATION */}
         <div className="grid md:grid-cols-2 gap-6 bg-gray-900 border border-gray-800 rounded-xl p-6 text-sm text-gray-400">
-
           {source_url && (
             <div>
               <strong className="text-gray-300">Publisher Website</strong>
