@@ -2,7 +2,9 @@ import dns from "node:dns/promises";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 import { MongoClient, ServerApiVersion } from "mongodb";
+
 import dotenv from "dotenv";
+import { startNewsCron } from "../cron/newsCron.js";
 dotenv.config();
 
 const uri = process.env.MONGODB_URI;
@@ -21,6 +23,7 @@ export const dbConnect = async () => {
     await client.connect();
     console.log("✅ Successfully connect DB.");
     db = client.db("task-management-practice");
+    startNewsCron();
   } catch (error) {
     console.log("❌ unsuccessfully connect DB.", error);
   }

@@ -3,7 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { dbConnect, getDB } from "./configs/dbConnect.js";
 import newsRoute from "./routes/news.route.js";
-import cron from "node-cron";
+import cors from "cors";
 const app = express();
 const port = 2000;
 
